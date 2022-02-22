@@ -28,7 +28,7 @@ For better understanding, for example in the year 2017 the change from Ticker AY
 ## Codes used during the execution of the project
 
 ### Original Code
-'''
+```
 Sub AllStocksAnalysis()
 
    Dim startTime As Single
@@ -151,8 +151,8 @@ Sub AllStocksAnalysis()
 
 End Sub
 
-'''
 
+```
 
 ### Refactored Code
 
