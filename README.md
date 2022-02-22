@@ -293,7 +293,150 @@ End Sub
 ```
 
 ### Alternative to Refactored Code
+```
+Sub AllStocksAnalysisRefactoredAlternative()
+    Dim startTime As Single
+    Dim endTime  As Single
 
+    yearValue = InputBox("What year would you like to run the analysis on?")
+
+    'Checks if the year is within a valid range to avoid errors during  the execution
+    If yearValue <> "2017" Then
+       If yearValue <> "2018" Then
+           MsgBox ("Please enter a valid year number. " + yearValue + " is not a valid value")
+           End 'Ends the execution if the year is not a valid number
+       End If
+    End If
+
+    'Starts timer
+    startTime = Timer
+    
+    'Format the output sheet on All Stocks Analysis worksheet
+    Worksheets("All Stocks Analysis").Activate
+    
+    Range("A1").Value = "All Stocks (" + yearValue + ")"
+    
+    'Create a header row
+    Cells(3, 1).Value = "Ticker"
+    Cells(3, 2).Value = "Total Daily Volume"
+    Cells(3, 3).Value = "Return"
+
+    'Initialize array of all tickers
+    Dim tickers(12) As String
+    
+    tickers(0) = "AY"
+    tickers(1) = "CSIQ"
+    tickers(2) = "DQ"
+    tickers(3) = "ENPH"
+    tickers(4) = "FSLR"
+    tickers(5) = "HASI"
+    tickers(6) = "JKS"
+    tickers(7) = "RUN"
+    tickers(8) = "SEDG"
+    tickers(9) = "SPWR"
+    tickers(10) = "TERP"
+    tickers(11) = "VSLR"
+    
+    'This array stores the row numbers where stock ticker changes occur.
+    'There are only 11 different stock tickers but we have an extra value to account for the RowCount, so the array has 12 values instead of 11
+    Dim breakPoint(12) As Integer
+     
+    'Activate data worksheet
+    Worksheets(yearValue).Activate
+    
+    'Get the number of rows to loop over
+    RowCount = Cells(Rows.Count, "A").End(xlUp).Row
+    
+    '1a) Create a ticker Index
+    
+    tickerIndex = 0 'Initializing the ticker index
+
+    '1b) Create three output arrays
+    
+    Dim tickerVolumes(12) As Long
+    Dim tickerStartingPrices(12) As Single
+    Dim tickerEndingPrices(12) As Single
+    
+    ''2a) Create a for loop to initialize the tickerVolumes to zero.
+    
+    For tickerIndex = 0 To 11
+    
+       tickerVolumes(tickerIndex) = 0
+       
+    Next tickerIndex
+        
+    ''2b) Loop over all the rows in the spreadsheet.
+    
+    breakPointIndex = 0
+    breakPoint(breakPointIndex) = 2
+    
+    breakPointIndex = breakPointIndex + 1
+    
+    'Since the first breakPoint was established at row 2, we need to start the loop in 3 instead of 2
+    For i = 3 To RowCount
+       If Cells(i, 1).Value <> Cells(i - 1, 1).Value Then 'If there is a change of the Ticker string, then the row number where it happened is recorded
+          breakPoint(breakPointIndex) = Cells(i, 1).Row
+          breakPointIndex = breakPointIndex + 1   'Only increments the breakPointIndex if there was a change of the Ticker string
+       End If
+    Next i
+    
+    'This section covers # 3a) and # 4) ==> Increases volume and calculate total daily volume for current ticker
+    'The last breakPoint needs to coincide with the RowCount + 1 because in the following loop the EndRow formula has a -1 to account for
+    breakPoint(12) = RowCount + 1
+    
+    'Now comes the determination of volumes for tickers 0 to 11, and the starting and ending prices
+    For TickersIndex = 0 To 11
+       
+       StartRow = breakPoint(TickersIndex)
+       'The EndRow is equal to the number contained in the following element in the breakPoint array less 1 unit.
+       'The reason is that in the following element of the array we have a new Ticker and so we need to substract 1 in order to obtain the last file of the current ticker
+       EndRow = breakPoint(TickersIndex + 1) - 1
+       
+       'This loop adds the volumes for each ticker
+       For RowIndex = StartRow To EndRow
+          tickerVolumes(TickersIndex) = tickerVolumes(TickersIndex) + Cells(RowIndex, 8).Value
+       Next RowIndex
+       
+       'This section covers 3b) 3c) and 3d) ==> Calculates the starting and ending price of each stock using the breakPoints calculated above
+       tickerStartingPrices(TickersIndex) = Cells(StartRow, 6).Value
+       tickerEndingPrices(TickersIndex) = Cells(EndRow, 6).Value
+    
+    Next TickersIndex
+    
+    '4) Loop through your arrays to output the Ticker, Total Daily Volume, and Return.
+    
+    'Formatting
+    Worksheets("All Stocks Analysis").Activate
+    Range("A3:C3").Font.FontStyle = "Bold"
+    Range("A3:C3").Borders(xlEdgeBottom).LineStyle = xlContinuous
+    Range("B4:B15").NumberFormat = "#,##0"
+    Range("C4:C15").NumberFormat = "0.0%"
+    Columns("B").AutoFit
+
+    dataRowStart = 4
+    dataRowEnd = 15
+
+    For i = dataRowStart To dataRowEnd
+    
+    'The arrays indexes need to substract the dataRowStart variable so that the index starts at 0 and not 4
+    Cells(i, 1).Value = tickers(i - dataRowStart)
+    Cells(i, 2).Value = tickerVolumes(i - dataRowStart)
+    Cells(i, 3) = (tickerEndingPrices(i - dataRowStart) / tickerStartingPrices(i - dataRowStart)) - 1
+    
+        If Cells(i, 3) > 0 Then
+            Cells(i, 3).Interior.Color = vbGreen
+        Else
+            Cells(i, 3).Interior.Color = vbRed
+        End If
+        
+    Next i
+    
+    'Stops timer
+    endTime = Timer
+    MsgBox "This code ran in " & (endTime - startTime) & " seconds for the year " & (yearValue)
+
+End Sub
+```
 
 
 ## Results
