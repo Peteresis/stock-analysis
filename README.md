@@ -6,22 +6,25 @@ As a starting point, an Excel file was received with information on a group of 1
 
 ### Purpose of the analysis
 
-Este proyecto tiene dos partes.
+This project has two parts:
 
-#### Parte 1
-La finalidad de la primera parte de este proyecto es la automatización del análisis de las acciones, mediante la creación de un código que lea los valores con el precio de la acción al principio del año y al cierre del año y saque el rendimiento de la acción en forma de porcentaje.  El código también debe reportar el volumen total transado por cada acción.  Al finalizar de generar la información indicada, el código debe crear una tabla con los resultados, formatear las columnas de dicha tabla y resaltar con color verde aquellas que obtuvieron ganancia y con color rojo las acciones que tuvieron un desempeño negativo.
+#### Part 1
+The purpose of the first part of this project is to automate the analysis of stocks by creating a code that reads the values with the stock price at the beginning of the year and at the end of the year and outputs the stock's performance as a percentage.  The code should also report the total volume traded for each stock.  Once the indicated information has been generated, the code should create a table with the results, format the columns of the table and highlight with green color those shares that obtained a profit and with red color the shares that had a negative performance.
 
-El código original trabaja en base a dos loops anidados.  Un loop recorre los tickers de las 12 acciones y para cada ticker realiza otro loop que recorre toda la hoja de Excel y recolecta la información sobre el precio inicial, precio final y volumen de cada uno de los tickers.
+The original code works on the basis of two nested loops.  One loop goes through the tickers of the 12 stocks and for each ticker performs another loop that goes through the entire Excel sheet and collects the information about the initial price, final price and volume of each of the tickers.
 
-#### Parte 2
-En la segunda parte, se busca mejorar el tiempo de ejecución del código y se propone cambiar (Refactor) el código original.  El cambio consiste en hacer un loop que recorra toda la hoja de Excel y va llevando el total acumulado para las acciones.  Además, cada vez que se produce un cambio en el nombre del ticker, registra el precio inicial y final del mismo.
+#### Part 2
+In the second part, we seek to improve the execution time of the code and we propose to change (Refactor) the original code.  The change consists of avoiding the use of nested loops and making a loop that runs through the entire Excel sheet once and keeps track of the accumulated total for the shares.  In addition, each time there is a change in the ticker name, it records the initial and final price of the ticker.
 
-La idea es comparar el tiempo de ejecución del método original descrito en la parte 1 contra el tiempo de ejecución del código refactored descrito en la parte 2 y ver si existe diferencia al hacer el refactoring.
+The idea is to compare the execution time of the original method described in part 1 against the execution time of the refactored code described in part 2 and see if there is a performance difference when refactoring.
 
-#### Parte 3
-Esta parte fue desarrollada por iniciativa propia con la finalidad de ver si se podía mejorar aún mas el código refactored.
+#### Part 3
+This part was developed on my own initiative in order to see if the refactored code could be further improved.
 
-En el tercer método se recorren los datos de la hoja de Excel una sola vez y se van guardando en un array los números de fila en los que sucede el cambio de un ticker a otroy se saca el dato del volumen acumulado para cada ticker.  A estas filas se les denomina break points.  Una vez determinados los break points, se hace un llamado a las celdas de Excel que contienen los datos del precio de inicial y final de cada acción y se construye la tabla con los resultados, dandole el mismo for,mato de colores verde y rojo explicado en la sección anterior.
+In the third method, the data of the Excel sheet is traversed only once and the row numbers in which the change from one ticker to another occurs are stored in an array and the running total volume data for each ticker is extracted.  These rows are called break points.  Once the break points are determined, a call is made to the Excel cells containing the initial and final price data for each stock in the break point lines and the table is constructed with the results, giving it the same green and red color format explained in the previous section.
+
+For better understanding, for example in the year 2017 the change from Ticker AY to Ticker CSIQ occurs in row 253; then row 253 constitutes a break point.  Other break points occur in row 504 (ticker changes from CSIQ to DQ), row 755 (ticker changes from DQ to ENPH) and so on.
+
 
 
 
