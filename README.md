@@ -14,14 +14,7 @@ The purpose of the first part of this project is to automate the analysis of sto
 The original code works on the basis of two nested loops.  One loop goes through the tickers of the 12 stocks and for each ticker performs another loop that goes through the entire Excel sheet and collects the information about the initial price, final price and volume of each of the tickers.
 
 #### Part 2
-In the second part, we seek to improve the execution time of the code and we propose to change (Refactor) the original code.  The change consists of avoiding the use of nested loops and making a loop that runs through the entire Excel sheet once and keeps track of the accumulated total for the shares.  In addition, each time there is a change in the ticker name, it records the initial and final price of the ticker.
-
-The idea is to compare the execution time of the original method described in part 1 against the execution time of the refactored code described in part 2 and see if there is a performance difference when refactoring.
-
-#### Part 3
-This part was developed on my own initiative in order to see if the refactored code could be further improved.
-
-In the third method, the data of the Excel sheet is traversed only once and the row numbers in which the change from one ticker to another occurs are stored in an array and the running total volume data for each ticker is extracted.  These rows are called break points.  Once the break points are determined, a call is made to the Excel cells containing the initial and final price data for each stock in the break point lines and the table is constructed with the results, giving it the same green and red color format explained in the previous section.
+In the second method, the data of the Excel sheet is traversed only once and the row numbers in which the change from one ticker to another occurs are stored in an array and the running total volume data for each ticker is extracted.  These rows are called break points.  Once the break points are determined, a call is made to the Excel cells containing the initial and final price data for each stock in the break point lines and the table is constructed with the results, giving it the same green and red color format explained in the previous section.
 
 For better understanding, for example in the year 2017 the change from Ticker AY to Ticker CSIQ occurs in row 253; then row 253 constitutes a break point.  Other break points occur in row 504 (ticker changes from CSIQ to DQ), row 755 (ticker changes from DQ to ENPH) and so on.
 
@@ -159,146 +152,6 @@ Sub AllStocksAnalysisRefactored()
     Dim endTime  As Single
 
     yearValue = InputBox("What year would you like to run the analysis on?")
-    
-    'Checks if the year is within range to avoid errors during  the execution
-    If yearValue <> "2017" Then
-     If yearValue <> "2018" Then
-         MsgBox ("Please enter a valid year number. " + yearValue + " is not a valid value")
-         End 'Ends the execution if the year is not a valid number
-     End If
-    End If
-
-    startTime = Timer
-    
-    'Format the output sheet on All Stocks Analysis worksheet
-    Worksheets("All Stocks Analysis").Activate
-    
-    Range("A1").Value = "All Stocks (" + yearValue + ")"
-    
-    'Create a header row
-    Cells(3, 1).Value = "Ticker"
-    Cells(3, 2).Value = "Total Daily Volume"
-    Cells(3, 3).Value = "Return"
-
-    'Initialize array of all tickers
-    Dim tickers(12) As String
-    
-    tickers(0) = "AY"
-    tickers(1) = "CSIQ"
-    tickers(2) = "DQ"
-    tickers(3) = "ENPH"
-    tickers(4) = "FSLR"
-    tickers(5) = "HASI"
-    tickers(6) = "JKS"
-    tickers(7) = "RUN"
-    tickers(8) = "SEDG"
-    tickers(9) = "SPWR"
-    tickers(10) = "TERP"
-    tickers(11) = "VSLR"
-    
-    'Activate data worksheet
-    Worksheets(yearValue).Activate
-    
-    'Get the number of rows to loop over
-    RowCount = Cells(Rows.Count, "A").End(xlUp).Row
-    
-    '1a) Create a ticker Index
-    tickerIndex = 0
-
-    '1b) Create three output arrays
-    Dim tickerVolumes(12) As Long
-    Dim tickerStartingPrices(12) As Single
-    Dim tickerEndingPrices(12) As Single
-    
-    ''2a) Create a for loop to initialize the tickerVolumes to zero.
-    ' If the next row’s ticker doesn’t match, increase the tickerIndex.
-    For i = 0 To 11
-        tickerVolumes(i) = 0
-        tickerStartingPrices(i) = 0
-        tickerEndingPrices(i) = 0
-    Next i
-   
-    ''2b) Loop over all the rows in the spreadsheet.
-    For i = 2 To RowCount
-    
-        '3a) Increase volume for current ticker
-        tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(i, 8).Value
-        
-        '3b) Check if the current row is the first row with the selected tickerIndex.
-        'If  Then
-        If Cells(i, 1).Value = tickers(tickerIndex) And Cells(i - 1, 1).Value <> tickers(tickerIndex) Then
-            tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
-        End If
-        
-        '3c) check if the current row is the last row with the selected ticker
-        'If  Then
-         If Cells(i, 1).Value = tickers(tickerIndex) And Cells(i + 1, 1).Value <> tickers(tickerIndex) Then
-            tickerEndingPrices(tickerIndex) = Cells(i, 6).Value
-         End If
-
-            '3d Increase the tickerIndex.
-             If Cells(i, 1).Value = tickers(tickerIndex) And Cells(i + 1, 1).Value <> tickers(tickerIndex) Then
-                tickerIndex = tickerIndex + 1
-            End If
-    
-    Next i
-    
-    '4) Loop through your arrays to output the Ticker, Total Daily Volume, and Return.
-    For i = 0 To 11
-        
-        Worksheets("All Stocks Analysis").Activate
-        Cells(4 + i, 1).Value = tickers(i)
-        Cells(4 + i, 2).Value = tickerVolumes(i)
-        Cells(4 + i, 3).Value = tickerEndingPrices(i) / tickerStartingPrices(i) - 1
-        
-    Next i
-    
-    
-    'Formatting
-    Worksheets("All Stocks Analysis").Activate
-    Range("A3:C3").Font.FontStyle = "Bold"
-    Range("A3:C3").Borders(xlEdgeBottom).LineStyle = xlContinuous
-    Range("B4:B15").NumberFormat = "#,##0"
-    Range("C4:C15").NumberFormat = "0.0%"
-    Worksheets("All Stocks Analysis").Columns("A:C").AutoFit
-    
-    dataRowStart = 4
-    dataRowEnd = 15
-    For i = dataRowStart To dataRowEnd
-
-        If Cells(i, 3) > 0 Then
-
-            'Color the cell green
-            Cells(i, 3).Interior.Color = vbGreen
-
-        ElseIf Cells(i, 3) < 0 Then
-
-            'Color the cell red
-            Cells(i, 3).Interior.Color = vbRed
-
-        Else
-
-            'Clear the cell color
-            Cells(i, 3).Interior.Color = xlNone
-
-        End If
-
-    Next i
-    
-     
-    endTime = Timer
-    MsgBox "This code ran in " & (endTime - startTime) & " seconds for the year " & (yearValue)
-
-End Sub
-```
-
-### Alternative to Refactored Code
-```
-Sub AllStocksAnalysisRefactoredAlternative()
-    Dim startTime As Single
-    Dim endTime  As Single
-
-    yearValue = InputBox("What year would you like to run the analysis on?")
 
     'Checks if the year is within a valid range to avoid errors during  the execution
     If yearValue <> "2017" Then
@@ -338,7 +191,8 @@ Sub AllStocksAnalysisRefactoredAlternative()
     tickers(11) = "VSLR"
     
     'This array stores the row numbers where stock ticker changes occur.
-    'There are only 11 different stock tickers but we have an extra value to account for the RowCount, so the array has 12 values instead of 11
+    'There are only 11 different stock tickers but we have an extra value to account for the RowCount
+    'so the array has 12 values instead of 11
     Dim breakPoint(12) As Integer
      
     'Activate data worksheet
@@ -374,7 +228,8 @@ Sub AllStocksAnalysisRefactoredAlternative()
     
     'Since the first breakPoint was established at row 2, we need to start the loop in 3 instead of 2
     For i = 3 To RowCount
-       If Cells(i, 1).Value <> Cells(i - 1, 1).Value Then 'If there is a change of the Ticker string, then the row number where it happened is recorded
+       'If there is a change of the Ticker string, then the row number where it happened is recorded
+       If Cells(i, 1).Value <> Cells(i - 1, 1).Value Then
           breakPoint(breakPointIndex) = Cells(i, 1).Row
           breakPointIndex = breakPointIndex + 1   'Only increments the breakPointIndex if there was a change of the Ticker string
        End If
@@ -389,7 +244,8 @@ Sub AllStocksAnalysisRefactoredAlternative()
        
        StartRow = breakPoint(TickersIndex)
        'The EndRow is equal to the number contained in the following element in the breakPoint array less 1 unit.
-       'The reason is that in the following element of the array we have a new Ticker and so we need to substract 1 in order to obtain the last file of the current ticker
+       'The reason is that in the following element of the array we have a new Ticker and so
+       'we need to substract 1 in order to obtain the last file of the current ticker
        EndRow = breakPoint(TickersIndex + 1) - 1
        
        'This loop adds the volumes for each ticker
