@@ -322,16 +322,16 @@ Following is a table with the results showing the time taken by the code to be e
 
 Below are the screenshots of the results obtained for years 2017 and 2018, using the original code and the refactored code:
 
-###**Original Code  Year: 2017      Execution time: 1.117188 seconds**
+### **Fig.1: Original Code  Year: 2017      Execution time: 1.117188 seconds**
 ![2017 Original Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2017%20Original.png)
 
-###**Original Code  Year: 2018      Execution time: 1.0625 seconds**
+### **Fig. 2: Original Code  Year: 2018      Execution time: 1.0625 seconds**
 ![2018 Original Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2018%20Original.png)
 
-###**Refactored Code  Year: 2017      Execution time: 0.125 seconds**
+### **Fig. 3: Refactored Code  Year: 2017      Execution time: 0.125 seconds**
 ![2017 Refactored Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2017%20Refactored.png)
 
-###**Refactored Code  Year: 2018      Execution time: 0.1132813 seconds**
+### **Fig. 4: Refactored Code  Year: 2018      Execution time: 0.1132813 seconds**
 ![2018 Refactored Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2018%20Refactored.png)
 
 
