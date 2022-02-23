@@ -302,7 +302,17 @@ End Sub
 
 ![2017 Original Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2017%20Original.png)
 
-![2017 and 2018 Refactored Code results](https://github.com/Peteresis/stock-analysis/blob/c90bd827d7354e0e66da47754284deb443714023/Resources/2017%20and%202018%20Refactored%20Code.png)
+
+![2018 Original Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2018%20Original.png)
+
+
+
+![2017 Refactored Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2017%20Refactored.png)
+
+
+![2018 Refactored Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2018%20Refactored.png)
+
+
 ## Conclusions
 
 
