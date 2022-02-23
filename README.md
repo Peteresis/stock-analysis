@@ -336,9 +336,9 @@ Below are the screenshots of the results obtained for years 2017 and 2018, using
 
 ## Conclusions
 
-En mi opinion, esta actividad nos deja dos aprendizajes:
+In my opinion, this activity leaves us with two lessons:
 
-1. El uso de Refactored code es una opción que permite ahorrar mucho trabajo al momento de modificar un programa para hacerlo mas eficiente o añadirle nuevas features.  Sin embargo, antes de tomar un script para Refactoring hay que estar seguro de que funciona correctamente, hay que entender lo que hace y como lo hace y hay que trabajar sobre una copia del código original para evotar dañar accidentalmente algo que estab funcionando.
-2. El uso de loops es una herramienta de uso común dentro de la programación de cualquier código, sin embargo hay que tener cuidado con el uso de nested loops ya que podrían multiplicar de forma exponencial la cantidad de iteraciones que ejecuta nuestro código.  El total de pasos requeridos al utilizar un nested loop se calcula multiplicando el núemro de iteraciones de cada loop.  `Total Iteraciones = Iteraciones loop externo x iteraciones nested loop 1 x iteraciones nested loop 2 x ...`    
+1. Refactoring (altering) a program to make it more efficient or add new features, is an approach that saves a lot of time. However, before refactoring a script, we have to make sure that the original code works properly, that we understand what the original code does and how it does it, and that we work on a copy of the original code to avoid accidently breaking something that was working.
+2. The use of loops is a commonly used tool within the programming of any code, however we must be careful with the use of nested loops since they could multiply exponentially the amount of iterations that our code executes.  The total number of steps required when using a nested loop is calculated by multiplying the number of iterations of each loop: `Total Iterations = Iterations external loop x iterations nested loop 1 x iterations nested loop 2 x ...` and so on.  In our case, the use of 1 loop without nested loops required 6025 iterations, while the use of a nested loop increased the total number of iterations to 36156, a sixfold increment.    
 
 
