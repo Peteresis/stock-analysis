@@ -14,9 +14,9 @@ The purpose of the first part of this project is to automate the analysis of sto
 The original code works on the basis of two nested loops.  One loop goes through the tickers of the 12 stocks and for each ticker performs another loop that goes through the entire Excel sheet and collects the information about the initial price, final price and volume of each of the tickers.
 
 #### Part 2
-In the second method, the data of the Excel sheet is traversed only once and the row numbers in which the change from one ticker to another occurs are stored in an array and the running total volume data for each ticker is extracted.  These rows are called break points.  Once the break points are determined, a call is made to the Excel cells containing the initial and final price data for each stock in the break point lines and the table is constructed with the results, giving it the same green and red color format explained in the previous section.
+In the second method, the data of the Excel sheet is traversed only once and the row numbers in which the change from one ticker to another ticker occurs are stored in an array and the running total volume data for each ticker is extracted.  These rows are called break points.  Once the break points are determined, a call is made to the Excel cells containing the initial and final price data for each stock in the break point lines and the output table is constructed with the results, giving it the same green and red color format explained in the previous section.
 
-For better understanding, for example in the year 2017 the change from Ticker AY to Ticker CSIQ occurs in row 253; then row 253 constitutes a break point.  Other break points occur in row 504 (ticker changes from CSIQ to DQ), row 755 (ticker changes from DQ to ENPH) and so on.
+For better understanding, for example in the year 2017 the change from Ticker AY to Ticker CSIQ occurs in row 253; then row 253 constitutes a break point.  Other break points occur in row 504 (ticker changes from CSIQ to DQ), row 755 (ticker changes from DQ to ENPH) and so on.  These break points are calculated programatically during the loop that performs the first and only pass of the Excel file.
 
 ## Codes used during the execution of the project
 
@@ -299,6 +299,18 @@ End Sub
 
 
 ## Results
+
+The original code uses a nested loop, with an upper limit of `11` for the external loop and an upper limit of `RowCount` for the internal loop, like this:
+
+```
+For i = 0 To 11
+...
+       For j = 2 To RowCount
+           ...        
+       Next j
+Next i
+```
+Since the value of `RowCount` in the example file is `3013`
 
 ![2017 Original Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2017%20Original.png)
 
