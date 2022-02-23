@@ -322,7 +322,7 @@ Following is a table with the results showing the time taken by the code to be e
 
 Below are the screenshots of the results obtained for years 2017 and 2018, using the original code and the refactored code:
 
-### **Fig.1: Original Code  Year: 2017      Execution time: 1.117188 seconds**
+### **Fig. 1: Original Code  Year: 2017      Execution time: 1.117188 seconds**
 ![2017 Original Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2017%20Original.png)
 
 ### **Fig. 2: Original Code  Year: 2018      Execution time: 1.0625 seconds**
@@ -334,10 +334,11 @@ Below are the screenshots of the results obtained for years 2017 and 2018, using
 ### **Fig. 4: Refactored Code  Year: 2018      Execution time: 0.1132813 seconds**
 ![2018 Refactored Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2018%20Refactored.png)
 
-
-
-
 ## Conclusions
 
+En mi opinion, esta actividad nos deja dos aprendizajes:
+
+1. El uso de Refactored code es una opción que permite ahorrar mucho trabajo al momento de modificar un programa para hacerlo mas eficiente o añadirle nuevas features.  Sin embargo, antes de tomar un script para Refactoring hay que estar seguro de que funciona correctamente, hay que entender lo que hace y como lo hace y hay que trabajar sobre una copia del código original para evotar dañar accidentalmente algo que estab funcionando.
+2. El uso de loops es una herramienta de uso común dentro de la programación de cualquier código, sin embargo hay que tener cuidado con el uso de nested loops ya que podrían multiplicar de forma exponencial la cantidad de iteraciones que ejecuta nuestro código.  El total de pasos requeridos al utilizar un nested loop se calcula multiplicando el núemro de iteraciones de cada loop.  `Total Iteraciones = Iteraciones loop externo x iteraciones nested loop 1 x iteraciones nested loop 2 x ...`    
 
 
