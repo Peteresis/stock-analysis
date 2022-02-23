@@ -313,6 +313,8 @@ End Sub
 ![2018 Refactored Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2018%20Refactored.png)
 
 
+![Results Table](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/Results.png)
+
 ## Conclusions
 
 
