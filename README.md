@@ -304,13 +304,22 @@ The original code uses a nested loop, with an upper limit of `11` for the extern
 
 ```
 For i = 0 To 11
-...
+   ...
        For j = 2 To RowCount
            ...        
        Next j
 Next i
 ```
-Since the value of `RowCount` in the example file is `3013`
+Since the value of `RowCount` in the example file is `3013` it means that the code has to do `12 x 3013 = 36156` iterations to complete the task. Please note that although the upper limit of the loop is 11, it starts in `0` and therefore it does 12 iterations and not 11. 
+
+In comparison, the Refactored code does not use nested loops.  It goes through the data once to determine the break points and then only makes small loops, once per each stock, to calculate the running total for the volume and extract the value of the initial price and final price pf the stock.  Each stock has 251 rows, corresponding to the 251 trading days in which NY Stock Exchange is open.
+
+The Refactored code does `6025` iterations.  This figure comes from `3013 full Excel data sheet iteration + 251 days x 12 stocks = 6025 iterations`. Because of this, the Refactored code has to go through a lot fewer steps than the original code did to finish the job.  The difference is `6025/36156 - 1 = -83.3%` reduction in the number of iterations when compared to the original code.
+
+Following is a table with the results showing the time taken by the code to be executed for the year 2017 and 2018, using the original code and the refactored code.
+
+![Results Table](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/Results.png)
+
 
 ![2017 Original Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2017%20Original.png)
 
@@ -325,7 +334,7 @@ Since the value of `RowCount` in the example file is `3013`
 ![2018 Refactored Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2018%20Refactored.png)
 
 
-![Results Table](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/Results.png)
+
 
 ## Conclusions
 
