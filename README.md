@@ -231,12 +231,14 @@ Sub AllStocksAnalysisRefactored()
        'If there is a change of the Ticker string, then the row number where it happened is recorded
        If Cells(i, 1).Value <> Cells(i - 1, 1).Value Then
           breakPoint(breakPointIndex) = Cells(i, 1).Row
-          breakPointIndex = breakPointIndex + 1   'Only increments the breakPointIndex if there was a change of the Ticker string
+          'Only increments the breakPointIndex if there was a change of the Ticker string
+          breakPointIndex = breakPointIndex + 1
        End If
     Next i
     
     'This section covers # 3a) and # 4) ==> Increases volume and calculate total daily volume for current ticker
-    'The last breakPoint needs to coincide with the RowCount + 1 because in the following loop the EndRow formula has a -1 to account for
+    'The last breakPoint needs to coincide with the RowCount + 1 because in the following loop
+    'the EndRow formula has a -1 to account for
     breakPoint(12) = RowCount + 1
     
     'Now comes the determination of volumes for tickers 0 to 11, and the starting and ending prices
@@ -253,7 +255,8 @@ Sub AllStocksAnalysisRefactored()
           tickerVolumes(TickersIndex) = tickerVolumes(TickersIndex) + Cells(RowIndex, 8).Value
        Next RowIndex
        
-       'This section covers 3b) 3c) and 3d) ==> Calculates the starting and ending price of each stock using the breakPoints calculated above
+       'This section covers 3b) 3c) and 3d) ==> Calculates the starting and ending price
+       'of each stock using the breakPoints calculated above
        tickerStartingPrices(TickersIndex) = Cells(StartRow, 6).Value
        tickerEndingPrices(TickersIndex) = Cells(EndRow, 6).Value
     
