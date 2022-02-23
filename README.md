@@ -336,9 +336,10 @@ Below are the screenshots of the results obtained for years 2017 and 2018, using
 
 ## Conclusions
 
-In my opinion, this activity leaves us with two lessons:
+I think this activity leaves us with three lessons:
 
 1. Refactoring (altering) a program to make it more efficient or add new features, is an approach that saves a lot of time. However, before refactoring a script, we have to make sure that the original code works properly, that we understand what the original code does and how it does it, and that we work on a copy of the original code to avoid accidently breaking something that was working.
-2. The use of loops is a commonly used tool within the programming of any code, however we must be careful with the use of nested loops since they could multiply exponentially the amount of iterations that our code executes.  The total number of steps required when using a nested loop is calculated by multiplying the number of iterations of each loop: `Total Iterations = Iterations external loop x iterations nested loop 1 x iterations nested loop 2 x ...` and so on.  In our case, the use of 1 loop without nested loops required 6025 iterations, while the use of a nested loop increased the total number of iterations to 36156, a sixfold increment.    
+2. It is possible to solve any problem in a variety of ways. When faced with a challenge, it is up to the programmer to think outside the box, analyze the data, and come up with a solution that is both easier to implement programmatically and more efficient in terms of how much time and resources it consumes.
+3. The use of loops is a commonly used tool within the programming of any code, however we must be careful with the use of nested loops since they could multiply exponentially the amount of iterations that our code executes.  The total number of steps required when using a nested loop is calculated by multiplying the number of iterations of each loop: `Total Iterations = Iterations external loop x iterations nested loop 1 x iterations nested loop 2 x ...` and so on.  In our case, the use of 1 loop without nested loops required 6025 iterations, while the use of a nested loop increased the total number of iterations to 36156, a sixfold increment.    
 
 
