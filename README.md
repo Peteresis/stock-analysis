@@ -297,6 +297,9 @@ End Sub
 
 ## Results
 
+![2017 Original Code results](https://github.com/Peteresis/stock-analysis/blob/b4ffa47a061043f21622863ba608c0ff3ee5832a/Resources/2017%20Original.png)
+
+
 ## Conclusions
 
 
